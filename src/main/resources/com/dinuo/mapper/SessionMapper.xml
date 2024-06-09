@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinuo.mapper.SessionMapper">
+
+    <insert id="saveSession" parameterType="com.dinuo.domain.po.Session" useGeneratedKeys="true" keyProperty="sessionId">
+        insert into session(session_id,user_id,system_param)
+        values(#{sessionId},#{userId}, #{systemParam})
+    </insert>
+    <delete id="deleteSession" parameterType="java.lang.String">
+        delete from session where session_id = #{sessionId}
+    </delete>
+    <select id="pageQuery" resultType="com.dinuo.domain.po.Session">
+        select * from session where user_id = #{id}
+    </select>
+    <select id="selectById" resultType="com.dinuo.domain.po.Session" parameterType="java.lang.String">
+        select * from session where session_id = #{sessionId};
+    </select>
+</mapper>
