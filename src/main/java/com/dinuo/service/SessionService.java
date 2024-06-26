@@ -1,6 +1,7 @@
 package com.dinuo.service;
 
 import com.dinuo.domain.dto.SessionDTO;
+import com.dinuo.domain.dto.UpdateSessionNameDTO;
 import com.dinuo.domain.vo.PageBean;
 
 /**
@@ -13,5 +14,7 @@ public interface SessionService {
     void deleteSession(String sessionId);
 
     PageBean querySession();
+
+    void updateName(UpdateSessionNameDTO updateSessionNameDTO);
 
 }

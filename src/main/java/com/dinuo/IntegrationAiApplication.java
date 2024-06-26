@@ -1,7 +1,10 @@
 package com.dinuo;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
 /**
  * @Author dinuo
@@ -10,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class IntegrationAiApplication {
     public static void main(String[] args) {
-        SpringApplication.run(IntegrationAiApplication.class, args);
+        ConfigurableApplicationContext run = SpringApplication.run(IntegrationAiApplication.class, args);
+
     }
+
 }

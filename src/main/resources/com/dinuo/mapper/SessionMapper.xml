@@ -4,9 +4,12 @@
 <mapper namespace="com.dinuo.mapper.SessionMapper">
 
     <insert id="saveSession" parameterType="com.dinuo.domain.po.Session" useGeneratedKeys="true" keyProperty="sessionId">
-        insert into session(session_id,user_id,system_param)
-        values(#{sessionId},#{userId}, #{systemParam})
+        insert into session(session_id,user_id,session_name,system_param)
+        values(#{sessionId},#{userId}, #{sessionName},#{systemParam})
     </insert>
+    <update id="updateName" parameterType="com.dinuo.domain.dto.UpdateSessionNameDTO">
+        update session set session_name = #{name} where session_id = #{sessionId}
+    </update>
     <delete id="deleteSession" parameterType="java.lang.String">
         delete from session where session_id = #{sessionId}
     </delete>

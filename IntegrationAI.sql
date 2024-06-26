@@ -15,8 +15,9 @@ CREATE TABLE model
 
 CREATE TABLE session
 (
-    session_id   Varchar(9) PRIMARY KEY ,
+    session_id   Varchar(9) PRIMARY KEY,
     user_id      INT          NOT NULL,
+    session_name VARCHAR(255) NOT NULL,
     system_param TEXT,
     FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
@@ -24,7 +25,7 @@ CREATE TABLE session
 CREATE TABLE chat_message
 (
     message_id INT PRIMARY KEY AUTO_INCREMENT,
-    session_id Varchar(9)         NOT NULL,
+    session_id Varchar(9)  NOT NULL,
     role       VARCHAR(50) NOT NULL,
     content    TEXT        NOT NULL,
     FOREIGN KEY (session_id) REFERENCES session (session_id)
@@ -36,9 +37,14 @@ values (1, '智普轻言', 'ChatGlm'),
        (3, '通义千问', 'QianWen');
 
 insert into user
-values (1,'admin','admin');
+values (1, 'admin', 'admin'),
+       (2, 'dinuo', '123');
+
+insert into session
+values ('8HJ75olF', 1, 'New Chat', '{"model":"ChatGLM-6B","temperature":0.5,"top_p":0.95,"max_length":256,"top_k":50}');
 
 insert into chat_message
-values (1,'8HJ75olF', 'user', '你好，我叫张三，应聘Web前端开发工程师'),
-       (2,'8HJ75olF', 'assistant', '好的，张三，非常感谢你来到我们公司面试。首先请你简要介绍一下你的技能和工作经验，以便我们更好地了解你的背景和能力。');
+values (1, '8HJ75olF', 'user', '你好，我叫张三，应聘Web前端开发工程师'),
+       (2, '8HJ75olF', 'assistant',
+        '好的，张三，非常感谢你来到我们公司面试。首先请你简要介绍一下你的技能和工作经验，以便我们更好地了解你的背景和能力。');
 

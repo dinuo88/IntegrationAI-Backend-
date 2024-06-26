@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author dinuo
@@ -11,6 +12,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(description = "用户信息")
 public class UserDTO {
 

@@ -1,11 +1,13 @@
 package com.dinuo.service.impl;
 
 import com.dinuo.domain.dto.SessionDTO;
+import com.dinuo.domain.dto.UpdateSessionNameDTO;
 import com.dinuo.domain.po.Model;
 import com.dinuo.domain.po.Session;
 import com.dinuo.domain.vo.PageBean;
 import com.dinuo.mapper.SessionMapper;
 import com.dinuo.service.SessionService;
+import com.dinuo.utils.UserContext;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,8 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public String saveSession(SessionDTO sessionDTO) {
         String str = generateShortUuid();
-        Session session = new Session(sessionDTO,1L,str);
+        Long userId = UserContext.get("userId");
+        Session session = new Session(sessionDTO,userId,str);
         sessionMapper.saveSession(session);
         return str;
     }
@@ -64,8 +67,14 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public PageBean querySession() {
+        Long userId = UserContext.get("userId");
         PageHelper.startPage(1,10);
-        Page<Session> page = sessionMapper.pageQuery(1L);
+        Page<Session> page = sessionMapper.pageQuery(userId);
         return new PageBean(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public void updateName(UpdateSessionNameDTO updateSessionNameDTO) {
+        sessionMapper.updateName(updateSessionNameDTO);
     }
 }

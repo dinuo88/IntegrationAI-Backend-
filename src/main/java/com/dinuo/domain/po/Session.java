@@ -22,10 +22,11 @@ public class Session {
     private String sessionId;
     private Long userId;
 //    private Long modelId;
-//    private String sessionName;
+    private String sessionName;
     private String systemParam;
 
     public Session(SessionDTO sessionDTO,Long userId,String sessionId){
+        this.sessionName = "New Chat";
         this.systemParam = sessionDTO.getSystem();
         this.sessionId = sessionId;
         this.userId = userId;

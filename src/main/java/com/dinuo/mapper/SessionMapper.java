@@ -1,6 +1,7 @@
 package com.dinuo.mapper;
 
 
+import com.dinuo.domain.dto.UpdateSessionNameDTO;
 import com.dinuo.domain.po.Session;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,6 @@ public interface SessionMapper {
     Page<Session> pageQuery(Long id);
 
     Session selectById(String id);
+
+    void updateName(UpdateSessionNameDTO updateSessionNameDTO);
 }

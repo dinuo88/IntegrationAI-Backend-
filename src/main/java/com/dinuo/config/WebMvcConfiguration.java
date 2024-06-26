@@ -1,7 +1,11 @@
 package com.dinuo.config;
 
+import com.dinuo.intecepter.LoginCheckInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +21,35 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+
+    @Autowired
+    private LoginCheckInterceptor loginCheckInterceptor;
+
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginCheckInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/user/login")
+                .excludePathPatterns("/user/register")
+                .excludePathPatterns("/doc.html")
+                .excludePathPatterns("/webjars/**")
+                .excludePathPatterns("/swagger-resources")
+                .excludePathPatterns("/v2/api-docs")
+                .order(1);
+
+    }
+
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOriginPatterns("http://localhost:8080")
+//                .allowedMethods("*")
+//                .allowCredentials(true)
+//                .maxAge(3600);
+//    }
+
 
     @Bean
     public Docket docket() {
